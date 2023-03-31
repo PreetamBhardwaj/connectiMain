@@ -1,0 +1,44 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.headersection{
+    width: 100%;
+    height: 10vh;
+}
+
+.middlesection{
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    flex-direction: row;
+}
+
+#left{
+    height: 100%;
+    width: 20vw;
+    border: 2px solid black;
+}
+
+#middle{
+    height: 100%;
+    width: 60vw;
+    border: 2px solid cyan;
+}
+
+#right{
+    height: 100%;
+    border: 2px solid black;
+    width: 20vw;
+}
+
+.footersection{
+    width: 100%;
+    height: 10vh;
+}
