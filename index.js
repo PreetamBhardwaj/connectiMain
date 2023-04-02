@@ -8,6 +8,7 @@ const db = require('./config/mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+const MongoStore = require('connect-mongo');
 
 app.use(express.urlencoded());
 
@@ -25,7 +26,7 @@ app.set('layout extractScripts',true);
 app.set('view engine','ejs');
 app.set('views','./views');
 
-// mongo store is used to storethe session cookie in the db
+// mongo store is used to store the session cookie in the db
 app.use(session({
     name: 'connecti',
     // TODO change the secret before deployment in production mode
@@ -34,12 +35,12 @@ app.use(session({
     resave: false,
     cookie: {
         maxAge: (1000 * 60 * 100)
-    }
-    // store: MongoStore.create({mongoUrl: 'mongodb://0.0.0.0/codeial_development'},
-    //     function(err){
-    //         console.log(err || 'connect-mongoDB setup ok');
-    //     }
-    // )
+    },
+    store: MongoStore.create({mongoUrl: 'mongodb://0.0.0.0/codeial_development'},
+        function(err){
+            console.log(err || 'connect-mongoDB setup ok');
+        }
+    )
 }));
 
 app.use(passport.initialize());
