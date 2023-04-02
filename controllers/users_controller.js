@@ -8,12 +8,22 @@ module.exports.profile = function(req,res){
 }
 
 module.exports.sign_up = function(req,res){
+
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+
     res.render('sign_up',{
         title : 'Sign Up'
     });
 }
 
 module.exports.sign_in = function(req,res){
+
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+
     res.render('sign_in',{
         title : 'Sign In'
     });
@@ -50,4 +60,16 @@ module.exports.createuser =async function(req,res){
         console.log('error in finding user in signing up');
         return;
     }
+}
+
+// sign in and create a session for the user
+module.exports.createsession = function(req,res){
+    return res.redirect('/');
+}
+
+module.exports.signout = function(req,res){
+    req.logout(function(err) {
+        if (err) { return err; }
+        return res.redirect('/');
+      });
 }
