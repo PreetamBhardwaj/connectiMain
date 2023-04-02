@@ -1,10 +1,25 @@
-const User = require('../models/user')
-const express = require("express");
+const User = require('../models/user');
 
-module.exports.profile = function(req,res){
-    res.render('user_profile',{
-        title : "user profile"
-    });
+module.exports.profile =async function(req,res){
+    if(req.cookies.user_id)
+    {
+        let user = await User.findById(req.cookies.user_id);
+
+        if(user)
+        {
+            return res.render('user_profile',{
+                title : "user profile",
+                user : user
+            });
+        }
+        else
+        {
+            return res.redirect('/users/sign-in');
+        }
+    }
+    else{
+        return res.redirect('/users/sign-in');
+    }
 }
 
 module.exports.sign_up = function(req,res){
@@ -20,7 +35,7 @@ module.exports.sign_in = function(req,res){
 }
 
 module.exports.createuser =async function(req,res){
-
+    console.log('email : ',req.body.email);
     if(req.body.password != req.body.confirm_password)
     {
         return res.redirect('back');
@@ -50,4 +65,36 @@ module.exports.createuser =async function(req,res){
         console.log('error in finding user in signing up');
         return;
     }
+}
+
+module.exports.createsession = async function(req,res){
+        console.log('email : ',req.body.email);
+
+        let user = await User.findOne({email : req.body.email});
+
+        // handle user found
+        if(user)
+        {
+            // handle password if doesn't match
+            if(user.password != req.body.password)
+            {
+                return res.redirect('back');
+            }
+
+            // handle session creation
+            console.log('user_id : ',user.id);
+            res.cookie('user_id',user.id);
+            return res.redirect('/users/profile');
+
+        }   // handle user not found
+        else{
+            console.log('user not found');
+            return res.redirect('back');
+        }
+}
+
+module.exports.signout = function(req,res){
+    res.cookie('user_id',56);
+    console.log('sign-out done');
+    return res.redirect('/users/sign-in');
 }
