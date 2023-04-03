@@ -30,6 +30,7 @@ body{
     height: 100%;
     width: 60vw;
     border: 2px solid cyan;
+    overflow-y: scroll;
 }
 
 #right{
