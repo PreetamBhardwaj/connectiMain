@@ -1,5 +1,42 @@
 #ulist{
     display: flex;
     flex-direction: column;
-    list-style-type: disc;
+}
+
+#post-box{
+    border: 2px solid red;
+    width: 90%;
+    height: 50vh;
+}
+
+.post-header{
+    width: 100%;
+    height: 15%;
+}
+
+.post-content{
+    width: 100%;
+    height: 55%;
+    border: 2px solid black;
+}
+
+.post-footer{
+    width: 100%;
+    height: 30%;
+    overflow-y: scroll;
+}
+
+#post-comments{
+    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+}
+
+#comment{
+    width: 80%;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
