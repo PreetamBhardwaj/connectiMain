@@ -9,8 +9,6 @@ router.get('/',homecontroller.home);
 
 router.use('/users',require('./users'));
 
-// router.post('/posts/create-post',posts_controller.create);
-
 router.use('/posts',require('./posts'));
 
 router.use('/comments',require('./comments'));

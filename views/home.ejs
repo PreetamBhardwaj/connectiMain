@@ -17,7 +17,14 @@
             <% for(post of posts){ %>
             <li id="post-box">
                 <div class="post-header">
-                    <%= post.user.name %>
+                    <span>
+                        <%= post.user.name %>
+                    </span>  
+                    <% if(locals.user && locals.user.id == post.user.id) { %>     
+                        <span>
+                            <a href="/posts/destroy-post/<%= post.id %>">delete</a>
+                        </span>
+                    <% } %>
                 </div>
                 <div class="post-content">
                     <%= post.content %>
@@ -40,6 +47,11 @@
                                         <small>
                                             <%= comment.user.name %>
                                         </small>
+                                        <% if(locals.user && locals.user.id == comment.user.id) { %>      
+                                            <span>
+                                                <a href="/comments/destroy-comment/<%= comment.id %>">delete</a>
+                                            </span>
+                                        <% } %>
                                     </li><br/>   
                                 <%}%>
                             </ul>

@@ -32,3 +32,24 @@ module.exports.create =async function(req,res){
     }
 
 }
+
+module.exports.destroy =async function(req,res){
+    try{
+        let comment = await Comment.findById(req.params.id);
+        if(comment.user == req.user.id){
+            let postid = Comment.post;
+
+            comment.deleteOne();
+
+            await Post.findByIdAndUpdate(postid, { $pull : {comments : req.params.id}});
+
+            console.log('comment deleted C_Controller');
+            return res.redirect('back');
+        }
+    }
+    catch(err)
+    {
+        console.log('Comment not found : ',err);
+        return res.redirect('back');
+    }
+}
