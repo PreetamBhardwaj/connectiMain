@@ -1,9 +1,12 @@
 const User = require('../models/user')
 const express = require("express");
 
-module.exports.profile = function(req,res){
+module.exports.profile =async function(req,res){
+    let user = await User.findById(req.params.id);
+    console.log("U_C : ",user);
     res.render('user_profile',{
-        title : "user profile"
+        title : "user profile",
+        profile_user : user
     });
 }
 
@@ -72,4 +75,15 @@ module.exports.signout = function(req,res){
         if (err) { return err; }
         return res.redirect('/');
       });
+}
+
+module.exports.update = async function(req,res){
+    if(req.user.id == req.params.id)
+    {
+        let user = await User.findByIdAndUpdate(req.params.id, req.body);
+        return res.redirect('/');
+    }
+    else{
+        res.status(401).send('Unautorized');
+    }
 }

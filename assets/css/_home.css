@@ -1,3 +1,30 @@
+#home{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+
+}
+
+#left{
+    width: 20%;
+    height: 100%;
+    border: 2px solid black;
+}
+
+#middle{
+    width: 60%;
+    height: 100%;
+    border: 2px solid cyan;
+    overflow-y: scroll;
+}
+
+#right{
+    width: 20%;
+    height: 100%;
+    border: 2px solid black;
+}
+
 #ulist{
     display: flex;
     flex-direction: column;
